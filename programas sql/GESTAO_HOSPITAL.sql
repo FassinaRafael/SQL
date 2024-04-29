@@ -1,0 +1,30 @@
+use exemplo;
+
+CREATE TABLE IF NOT EXISTS Pacientes(
+CPF VARCHAR(11) PRIMARY KEY,
+nome VARCHAR(50) NOT NULL,
+data_nascimento DATE NOT NULL,
+telefone VARCHAR(40) NOT NULL,
+email VARCHAR(45) NOT NULL
+);
+CREATE TABLE IF NOT EXISTS Departamentos(
+Cod_especialidade INT PRIMARY KEY,
+Nome_especialidade VARCHAR(45) NOT NULL
+);
+CREATE TABLE IF NOT EXISTS Medicos(
+CRM INT PRIMARY KEY,
+nome VARCHAR(50) NOT NULL,
+email VARCHAR(45) NOT NULL,
+telefone VARCHAR(40) NOT NULL,
+Cod_especialidade INT,
+FOREIGN KEY (Cod_especialidade) REFERENCES Departamentos(Cod_especialidade)
+);
+CREATE TABLE IF NOT EXISTS Consulta(
+Id_consulta INT PRIMARY KEY,
+data_consulta DATE NOT NULL,
+anamnese TEXT NOT NULL,
+CPF VARCHAR(11) NOT NULL,
+CRM INT NOT NULL,
+FOREIGN KEY (CPF) REFERENCES Pacientes(CPF),
+FOREIGN KEY (CRM) REFERENCES Medicos(CRM)
+);
